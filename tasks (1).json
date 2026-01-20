@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "time": "09:05",
+        "action": "play arti",
+        "repeat": "daily",
+        "last_run": ""
+    },
+    {
+        "id": 2,
+        "time": "18:00",
+        "action": "play hanuman chalisa",
+        "repeat": "daily",
+        "last_run": "2026-01-19"
+    },
+    {
+        "id": 3,
+        "time": "17:52",
+        "action": "play arti",
+        "repeat": "daily",
+        "last_run": "2026-01-19"
+    }
+]
