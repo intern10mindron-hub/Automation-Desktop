@@ -1,0 +1,248 @@
+* {
+    box-sizing: border-box;
+    font-family: "Poppins", "Segoe UI", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 15px;
+    position: relative;
+}
+
+/* BLURRED BACKGROUND IMAGE */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("/static/bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(10px);
+    transform: scale(1.1); /* prevents white edges */
+    z-index: -1;
+}
+
+/* MAIN CARD */
+.container {
+    width: 100%;
+    max-width: 850px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 22px;
+    padding: 35px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+    position: relative;
+    z-index: 1;
+    margin-top: 60px;
+}
+
+/* HEADINGS */
+h1 {
+    text-align: center;
+    margin-bottom: 5px;
+    color: #222;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+h2 {
+    margin-top: 35px;
+    color: #333;
+}
+
+/* FORM */
+.task-form {
+    display: flex;
+    gap: 12px;
+}
+
+.task-form input {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.task-form button {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+    border: none;
+    padding: 14px 22px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.task-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79,70,229,0.4);
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+}
+
+thead {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+}
+
+th, td {
+    padding: 14px;
+    text-align: center;
+}
+
+tbody tr {
+    transition: background 0.3s;
+}
+
+tbody tr:hover {
+    background: #eef2ff;
+}
+
+tbody tr:nth-child(even) {
+    background: #f7f8ff;
+}
+
+/* BADGE */
+.badge {
+    background: #e0e7ff;
+    color: #3730a3;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* TIME STYLE */
+.time {
+    font-weight: bold;
+    color: #111;
+}
+
+/* REMOVE */
+.remove-btn {
+    color: red;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.remove-btn:hover {
+    color: darkred;
+}
+
+/* STOP BUTTON */
+.stop-btn {
+    display: block;
+    margin: 35px auto 0;
+    text-align: center;
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    color: white;
+    padding: 14px;
+    width: 180px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.stop-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(220,38,38,0.5);
+}
+
+/* EMPTY */
+.empty {
+    text-align: center;
+    color: #777;
+    margin-top: 20px;
+}
+
+.volume-slider {
+    width: 100%;
+    margin-top: 10px;
+    accent-color: #4b4fd9;
+}
+
+.manual-player {
+    margin-top: 35px;
+    padding: 25px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.manual-player h2 {
+    margin-bottom: 18px;
+    text-align: center;
+    color: #333;
+}
+
+.player-button {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 22px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.25s ease;
+}
+
+.btn.play {
+    background: linear-gradient(135deg, #43cea2, #185a9d);
+    color: #fff;
+}
+
+.btn.stop {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: #fff;
+}
+
+.btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.audio-list {
+    max-height: 220px;
+    overflow-y: auto;
+    margin-top: 15px;
+}
+
+.audio-item {
+    padding: 12px;
+    border-radius: 10px;
+    background: #eef2ff;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.audio-item:hover {
+    background: #c7d2fe;
+}
+
+#search {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+
