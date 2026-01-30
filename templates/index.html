@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Automation Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>⏰ Automation Dashboard</h1>
+    <p class="subtitle">Smart Automation</p>
+
+    <!-- ADD TASK -->
+    <form action="/command" method="post" class="task-form">
+        <input type="text" name="command" placeholder="e.g. 09:05 play arti" required>
+        <button type="submit">＋ Add Task</button>
+    </form>
+
+    <!-- TASK LIST -->
+    <h2>Scheduled Tasks</h2>
+
+    {% if tasks %}
+    <table>
+        <thead>
+            <tr>
+                <th>⏱ Time</th>
+                <th>⚙ Action</th>
+                <th>❌ Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td><span class="task-time">
+    {{ task.time_display if task.time_display else task.time }}
+</span>
+</td>
+                <td>
+                    <span class="badge">{{ task.action }}</span>
+                </td>
+                <td>
+                    <a href="/remove/{{ task.id }}" class="remove-btn">✖</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="empty">No tasks scheduled yet</p>
+    {% endif %}
+
+    <!-- STOP -->
+    <a href="/stop_arti" class="stop-btn">⏹ Stop</a>
+
+    <div class="volume-card">
+    <h3>🔊 Volume</h3>
+    <input type="range" min="0" max="512" value="300"
+           class="volume-slider"
+           oninput="setVolume(this.value)">
+</div>
+
+<script>
+function setVolume(val) {
+    fetch(`/set_volume/${val}`);
+}
+</script>
+
+<div class="manual-player">
+    <h2>Manual Player</h2>
+
+    <input type="text" id="search" placeholder="Search audio..." onkeyup="filterAudio()">
+
+    <div id="audioList" class="audio-list"></div>
+
+    
+</div>
+
+<script>
+let audios = [];
+
+fetch("/manual/audios")
+.then(res => res.json())
+.then(data => {
+    audios = data.audios;
+    renderList(audios);
+});
+
+let currentPlaying = null;
+
+function renderList(list) {
+    const box = document.getElementById("audioList");
+    box.innerHTML = "";
+    list.forEach(a => {
+        // Check if this item is the one currently playing
+        const isPlaying = (a === currentPlaying);
+        box.innerHTML += `
+            <div class="audio-item ${isPlaying ? 'active' : ''}" onclick="toggleAudio('${a}')">
+                <span class="icon">${isPlaying ? '⏸️' : '▶️'}</span>
+                <span class="file-name">${a}</span>
+                ${isPlaying ? '<span class="playing-wave"></span>' : ''}
+            </div>`;
+    });
+}
+
+function filterAudio() {
+    const q = document.getElementById("search").value.toLowerCase();
+    renderList(audios.filter(a => a.toLowerCase().includes(q)));
+}
+
+function toggleAudio(audio) {
+    if (currentPlaying === audio) {
+        currentPlaying = null; // It was playing, now it's stopped
+    } else {
+        currentPlaying = audio; // New audio started
+    }
+    
+    fetch(`/manual/toggle/${audio}`);
+    renderList(audios); // Re-render to show updated icons/colors
+}
+
+function stopManual() {
+    fetch("/manual/stop");
+}
+</script>
+
+<!-- TEXT TO SPEECH -->
+<div class="manual-player">
+    <h2>Text to Speech</h2>
+
+    <form onsubmit="speakText(event)">
+        <input type="text"
+               id="ttsText"
+               placeholder="Enter announcement text..."
+               required>
+        <button class="btn play" type="submit">🔊 Speak</button>
+    </form>
+</div>
+
+<script>
+function speakText(e) {
+    e.preventDefault();
+
+    const text = document.getElementById("ttsText").value;
+
+    fetch("/tts", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: "text=" + encodeURIComponent(text)
+    });
+
+    document.getElementById("ttsText").value = "";
+}
+</script>
+
+<div class="manual-player">
+    <h2>Upload MP3</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".mp3" required>
+        <button class="btn play" type="submit">Upload</button>
+    </form>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "time": "09:05",
+        "action": "play arti",
+        "repeat": "daily",
+        "last_run": ""
+    }
+]

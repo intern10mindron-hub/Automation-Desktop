@@ -1,0 +1,453 @@
+* {
+    box-sizing: border-box;
+    font-family: "Poppins", "Segoe UI", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 15px;
+    position: relative;
+}
+
+/* BLURRED BACKGROUND IMAGE */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("/static/bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(10px);
+    transform: scale(1.1); /* prevents white edges */
+    z-index: -1;
+}
+
+/* MAIN CARD */
+.container {
+    width: 95%; 
+    max-width: 1400px;
+    min-height: 90vh;
+    background: rgba(20, 22, 30, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 22px;
+    padding: 40px;
+    margin: 5px auto;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* HEADINGS */
+h1 {
+    text-align: center;
+    margin-bottom: 5px;
+    color: #fcf9f9;
+}
+
+.subtitle {
+    text-align: center;
+    color: white;
+    margin-bottom: 25px;
+}
+
+h2 {
+    margin-top: 35px;
+    color: #fdf9f9;
+}
+
+/* FORM */
+.task-form {
+    display: flex;
+    gap: 12px;
+}
+
+.task-form input {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.task-form button {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+    border: none;
+    padding: 14px 22px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.task-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79,70,229,0.4);
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+}
+
+thead {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+}
+
+th, td {
+    padding: 14px;
+    text-align: center;
+}
+
+tbody tr {
+    transition: background 0.3s;
+}
+
+tbody tr:hover {
+    background: #eef2ff;
+}
+
+tbody tr:nth-child(even) {
+    background: #f7f8ff;
+}
+
+/* BADGE */
+.badge {
+    background: #e0e7ff;
+    color: #3730a3;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* TIME STYLE */
+.time {
+    font-weight: bold;
+    color: #111;
+}
+
+/* REMOVE */
+.remove-btn {
+    color: red;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.remove-btn:hover {
+    color: darkred;
+}
+
+/* STOP BUTTON */
+.stop-btn {
+    display: block;
+    margin: 35px auto 0;
+    text-align: center;
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    color: white;
+    padding: 14px;
+    width: 180px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.stop-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(220,38,38,0.5);
+}
+
+/* EMPTY */
+.empty {
+    text-align: center;
+    color: #777;
+    margin-top: 20px;
+}
+
+.volume-slider {
+    width: 100%;
+    margin-top: 10px;
+    accent-color: #4b4fd9;
+}
+
+.manual-player {
+    margin-top: 35px;
+    padding: 25px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    box-shadow: 0 12px 30px rgba(240, 240, 240, 0.15);
+}
+
+.manual-player h2 {
+    margin-bottom: 18px;
+    text-align: center;
+    color: #f8f6f6;
+}
+
+.player-button {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 22px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.25s ease;
+}
+
+.btn.play {
+    background: linear-gradient(135deg, #269773, #185a9d);
+    color: #fff;
+}
+
+.btn.stop {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: #fff;
+}
+
+.btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.audio-list {
+    max-height: 220px;
+    overflow-y: auto;
+    margin-top: 15px;
+}
+
+.audio-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.audio-item:hover {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.4);
+}
+
+#search {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.manual-player form {
+    display: flex;
+    gap: 10px;
+}
+
+.manual-player input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* =========================
+   🌙 DARK THEME OVERRIDE
+   ========================= */
+
+/* BODY & BACKGROUND */
+body {
+    color: #e5e7eb;
+}
+
+/* Main container */
+.container {
+    background: rgba(20, 22, 30, 0.95);
+    color: #e5e7eb;
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: #f9fafb;
+}
+
+.subtitle {
+    color: #9ca3af;
+}
+
+/* INPUTS */
+input[type="text"],
+input[type="range"] {
+    background: #111827;
+    color: #e5e7eb;
+    border: 1px solid #374151;
+}
+
+input::placeholder {
+    color: #9ca3af;
+}
+
+/* TABLE */
+table {
+    background: transparent;
+}
+
+thead {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+}
+
+tbody tr {
+    background: #0f172a;
+}
+
+tbody tr:nth-child(even) {
+    background: #020617;
+}
+
+tbody tr:hover {
+    background: #1e293b;
+}
+
+/* BADGE */
+.badge {
+    background: #1e1b4b;
+    color: #c7d2fe;
+}
+
+/* REMOVE ICON */
+.remove-btn {
+    color: #f87171;
+}
+
+/* STOP BUTTON */
+.stop-btn {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+}
+
+/* VOLUME SLIDER */
+.volume-slider {
+    accent-color: #6366f1;
+}
+
+/* CARDS (Manual + TTS) */
+.manual-player {
+    background: linear-gradient(135deg, #020617, #020617);
+    color: #e5e7eb;
+}
+
+/* AUDIO LIST */
+.audio-item {
+    background: #020617;
+    color: #e5e7eb;
+    border: 1px solid #1e293b;
+}
+
+.audio-item:hover {
+    background: #1e293b;
+}
+
+/* SEARCH INPUT */
+#search {
+    background: #020617;
+    color: #e5e7eb;
+}
+
+/* BUTTONS */
+.btn.play {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.btn.stop {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* TTS BUTTON */
+.manual-player button {
+    background: linear-gradient(135deg, #0ea5e9, #2563eb);
+    color: #fff;
+}
+
+/* SCROLLBAR (Optional – looks premium) */
+.audio-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.audio-list::-webkit-scrollbar-thumb {
+    background: #4f46e5;
+    border-radius: 10px;
+}
+
+.audio-list::-webkit-scrollbar-track {
+    background: #020617;
+}
+
+.manual-player input[type="file"] {
+    flex: 1;
+    padding: 10px;
+    background: #020617;
+    color: #e5e7eb;
+    border-radius: 10px;
+    border: 1px solid #374151;
+}
+
+.audio-item.active {
+    background: linear-gradient(90deg, rgba(79, 70, 229, 0.2), rgba(6, 182, 212, 0.1));
+    border-color: #6366f1;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.audio-item.active .file-name {
+    color: #fff;
+    font-weight: 600;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Simple 'Playing' animation dot */
+.playing-wave {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    margin-left: auto;
+    box-shadow: 0 0 10px #22c55e;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.upload-form {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Ensure table uses the extra width effectively */
+table {
+    width: 100%;
+    font-size: 1.1rem; /* Slightly larger text for full-screen */
+}
+
+/* Flexible grid for Manual Player and TTS (Optional) */
+/* This makes them sit side-by-side on large screens */
+@media (min-width: 1000px) {
+    .flex-row {
+        display: flex;
+        gap: 30px;
+    }
+    .manual-player {
+        flex: 1;
+    }
+}
